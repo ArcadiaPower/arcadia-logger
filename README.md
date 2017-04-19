@@ -38,10 +38,10 @@ ArcadiaLogger.log(severity: :error, message: 'message')
 # only to selected adapters
 ArcadiaLogger.log(severity: :error, message: 'message', adapters: [:custom_logger, :rollbar])
 
-# ruby loger style
+# ruby logger style
 ArcadiaLogger.error('message')
 
-# to selected adapoters
+# to selected adapters
 ArcadiaLogger.error('message', adapters: [:custom_logger, :rollbar])
 
 ```
