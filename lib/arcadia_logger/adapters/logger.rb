@@ -17,7 +17,7 @@ module ArcadiaLogger
         @logger = logger
       end
 
-      def log(severity:, message:)
+      def log(severity:, message:, options: {})
         @logger.log(SEVERITY[severity] || ::Logger::Severity::UNKNOWN, message.to_s)
       end
     end

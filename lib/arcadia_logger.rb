@@ -5,6 +5,7 @@ module ArcadiaLogger
   module Adapters
     autoload :Logger, 'arcadia_logger/adapters/logger'
     autoload :Rollbar, 'arcadia_logger/adapters/rollbar'
+    autoload :Logstash, 'arcadia_logger/adapters/logstash'
   end
 
   @@adapters = { logger: Adapters::Logger.new }
@@ -14,14 +15,14 @@ module ArcadiaLogger
       @@adapters = value
     end
 
-    def log(severity:, message:, adapters: @@adapters.keys)
+    def log(severity:, message:, adapters: @@adapters.keys, options: {})
       adapters.each do |adapter_id|
-        @@adapters[adapter_id].log(severity: severity, message: message)
+        @@adapters[adapter_id].log(severity: severity, message: message, options: options)
       end
     end
 
-    def method_missing(name, *args, adapters: @@adapters.keys)
-      log(severity: name, message: args.first, adapters: adapters)
+    def method_missing(name, *args, adapters: @@adapters.keys, options: {})
+      log(severity: name, message: args.first, adapters: adapters, options: options)
     end
 
     def warn(*args, adapters: @@adapters.keys)

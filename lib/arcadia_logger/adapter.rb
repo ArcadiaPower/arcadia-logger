@@ -1,6 +1,6 @@
 module ArcadiaLogger
   class Adapter
-    def log(severity:, message:)
+    def log(severity:, message:, options: {})
     end
 
     def method_missing(name, *args)

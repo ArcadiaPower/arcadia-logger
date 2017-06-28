@@ -25,7 +25,8 @@ ArcadiaLogger.setup do |config|
   config.adapters = {
     custom_logger: ArcadiaLogger::Adapters::Logger.new # STDOUT by default,
     rails_application_logger: ArcadiaLogger::Adapters::Logger.new(logger: Rails.logger),
-    rollbar: ArcadiaLogger::Adapters::Rollbar.new # needs to be already configured (api key set) in your app
+    rollbar: ArcadiaLogger::Adapters::Rollbar.new, # needs to be already configured (api key set) in your app
+    logstash: ArcadiaLogger::Adapters::Logstash.new
   }
 end
 ```
@@ -43,6 +44,9 @@ ArcadiaLogger.error('message')
 
 # to selected adapters
 ArcadiaLogger.error('message', adapters: [:custom_logger, :rollbar])
+
+# some adapters allow for options
+ArcadiaLogger.debug('message', adapters: [:logstash], options: { tags: ['TAG'] })
 
 ```
 
