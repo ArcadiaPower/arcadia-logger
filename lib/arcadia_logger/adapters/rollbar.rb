@@ -7,8 +7,8 @@ module ArcadiaLogger
         @logger = ::Rollbar
       end
 
-      def log(severity:, message:)
-        @logger.log(severity, message)
+      def log(severity:, message:, **extra_data)
+        @logger.log(severity, message, **extra_data)
       end
     end
   end

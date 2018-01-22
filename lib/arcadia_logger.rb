@@ -14,18 +14,18 @@ module ArcadiaLogger
       @@adapters = value
     end
 
-    def log(severity:, message:, adapters: @@adapters.keys)
+    def log(severity:, message:, adapters: @@adapters.keys, **extra_data)
       adapters.each do |adapter_id|
-        @@adapters[adapter_id].log(severity: severity, message: message)
+        @@adapters[adapter_id].log(severity: severity, message: message, **extra_data)
       end
     end
 
-    def method_missing(name, *args, adapters: @@adapters.keys)
-      log(severity: name, message: args.first, adapters: adapters)
+    def method_missing(name, *args, adapters: @@adapters.keys, **extra_data)
+      log(severity: name, message: args.first, adapters: adapters, **extra_data)
     end
 
-    def warn(*args, adapters: @@adapters.keys)
-      log(severity: :warn, message: args.first, adapters: adapters)
+    def warn(*args, adapters: @@adapters.keys, **extra_data)
+      log(severity: :warn, message: args.first, adapters: adapters, **extra_data)
     end
 
     def setup
